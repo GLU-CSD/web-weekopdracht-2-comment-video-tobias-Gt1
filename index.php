@@ -10,9 +10,9 @@ if(!empty($_POST)){
 
     //dit is een voorbeeld array.  Deze waardes moeten erin staan.
     $postArray = [
-        'name' => "Ieniminie",
+        'name' => $_POST['name'],
         'email' => "ieniminie@sesamstraat.nl",
-        'message' => "Geweldig dit"
+        'message' => $_POST['message'],
     ];
 
     $setReaction = Reactions::setReaction($postArray);
@@ -31,15 +31,55 @@ if(!empty($_POST)){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Youtube remake</title>
+
+    <style>
+    .reaction{
+        background-color: lightblue;
+        border-radius: 10px;
+        box-shadow: 5px 5px 5px black;
+        margin: 10px;
+        padding: 10px;
+    }
+    </style>
 </head>
 <body>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=twI61ZGDECBr4ums" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-    <h2>Hieronder komen reacties</h2>
-    <p>Maak hier je eigen pagina van aan de hand van de opdracht</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/16jA-6hiSUo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<form method="post">
+    <br>
+    <label for="name"> Name </label>
+    <input required type="text" placeholder= "vul hier naam" name = "name">
+    <br>
+    <br>
+    <label for="w3review"> message </label>
+    <br>
+    <textarea required id="w3review" name="message" rows="4" cols="50"> Type here...</textarea>
+    <input required type="submit" value="versturen">
+
+
+    <h2>Comments</h2>
+    <!-- //*<p>Comments:</p>//* -->
+
+    
 </body>
 </html>
 
 <?php
 $con->close();
+
+//echo "<pre>".var_dump($getReactions)."</pre>";
+
+echo ("<h2>Er zijn ".count($getReactions)." reactie</h2>");
+for ($i=0; $i < count($getReactions); $i++) { 
+
+    echo ("<div class='reaction'>");
+    echo ($getReactions[$i]['name']."--");
+    echo ($getReactions[$i]['id']."<br>");
+    echo ("</div>");
+}
+    
+
+
+
+
 ?>
